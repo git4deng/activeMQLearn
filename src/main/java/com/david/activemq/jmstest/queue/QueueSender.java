@@ -3,6 +3,7 @@ package com.david.activemq.jmstest.queue;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
+import javax.jms.MapMessage;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -24,9 +25,16 @@ public class QueueSender {
 		MessageProducer producer = session.createProducer(destination);
 		//发送消息
 		for (int i = 0; i < 3; i++) {
-			TextMessage message = session.createTextMessage("message------>"+i);
+			/*TextMessage message = session.createTextMessage("message------>"+i);
 			Thread.sleep(1000);
-			producer.send(message);
+			*/
+			// 测试message相关结构属性
+			MapMessage mapMessage = session.createMapMessage();
+			//设置属性
+			mapMessage.setStringProperty("hello"+i, "world");
+			//设置值
+			mapMessage.setString("message---"+i, "my map message++++++++"+i);
+			producer.send(mapMessage);
 		}
 		session.commit();
 		session.close();
