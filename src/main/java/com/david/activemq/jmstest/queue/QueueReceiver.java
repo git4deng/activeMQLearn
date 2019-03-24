@@ -87,7 +87,7 @@ public class QueueReceiver {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		//创建连接工厂
+		//创建连接工厂（此地址为后面测试broker的时候填入的，实际需要天气activeMQ运行地址和端口)
 		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
 		Connection conn = connFactory.createConnection();
 		//连接 activeMQ
