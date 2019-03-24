@@ -88,7 +88,7 @@ public class QueueReceiver {
 	 */
 	public static void main(String[] args) throws Exception {
 		//创建连接工厂
-		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://47.107.184.235:61616");
+		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
 		Connection conn = connFactory.createConnection();
 		//连接 activeMQ
 		conn.start();

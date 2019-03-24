@@ -87,7 +87,7 @@ public class QueueSender {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://47.107.184.235:61616");
+		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
 		Connection conn = connFactory.createConnection();
 		conn.start();
 		Session session = conn.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
