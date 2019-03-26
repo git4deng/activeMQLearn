@@ -36,13 +36,30 @@
 	</bean>
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="jmsFactory"/>
-		<property name="defaultDestination" ref="destination"/>
+		<!--发送queue消息的目的地-->
+		<!-- <property name="defaultDestination" ref="destination"/> -->
+		<!--发送topic消息的目的地-->
+		<property name="defaultDestination" ref="dest-topic"/>
 		<property name="messageConverter">
 			<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
 		</property>
 	</bean>
-	
+	<!--发送queue消息的目的地-->
 	<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg index="0" value="spring-queue"></constructor-arg>
 	</bean>
+	
+	<!--发送topic消息的目的地(注意：默认发送topic消息，订阅不是持久化的，所以得先启动receiver)-->
+	<bean id="dest-topic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg index="0" value="spring-topic"></constructor-arg>
+	</bean>
+	
+	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsFactory"></property>
+		<property name="destination" ref="dest-topic"></property>
+		<property name="messageListener" ref="messageListener"></property>
+	</bean>
+	
+	<bean id="messageListener" class="com.david.activemq.jmstest.spring.listener.MyMessageListener"></bean>
+	
 </beans>
