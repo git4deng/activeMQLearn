@@ -16,35 +16,35 @@ public class QueueSender {
 	 * @param args
 	 * @throws Exception
 	 */
-//	public static void main(String[] args) throws Exception {
-//		//创建连接工厂
-//		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://47.107.184.235:61616");
-//		Connection conn = connFactory.createConnection();
-//		//连接 activeMQ
-//		conn.start();
-//		//创建会话 Boolean.TRUE 表示需要会话 Session.AUTO_ACKNOWLEDGE 会话自动确认
-//		Session session = conn.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
-//		//创建目的地
-//		Destination destination = session.createQueue("david-queue");
-//		//创建生产者
-//		MessageProducer producer = session.createProducer(destination);
-//		//发送消息
-//		for (int i = 0; i < 3; i++) {
-//			/*TextMessage message = session.createTextMessage("message------>"+i);
+	public static void main(String[] args) throws Exception {
+		//创建连接工厂
+		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://47.107.184.235:61616");
+		Connection conn = connFactory.createConnection();
+		//连接 activeMQ
+		conn.start();
+		//创建会话 Boolean.TRUE 表示需要会话 Session.AUTO_ACKNOWLEDGE 会话自动确认
+		Session session = conn.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
+		//创建目的地
+		Destination destination = session.createQueue("david-queue");
+		//创建生产者
+		MessageProducer producer = session.createProducer(destination);
+		//发送消息
+		for (int i = 0; i < 3; i++) {
+//			TextMessage message = session.createTextMessage("message------>"+i);
 //			Thread.sleep(1000);
-//			*/
-//			// 测试message相关结构属性
-//			MapMessage mapMessage = session.createMapMessage();
-//			//设置属性
-//			mapMessage.setStringProperty("hello"+i, "world");
-//			//设置值
-//			mapMessage.setString("message---"+i, "my map message++++++++"+i);
-//			producer.send(mapMessage);
-//		}
-//		session.commit();
-//		session.close();
-//		conn.close();
-//	}
+			
+			// 测试message相关结构属性
+			MapMessage mapMessage = session.createMapMessage();
+			//设置属性
+			mapMessage.setStringProperty("hello"+i, "world111111111111");
+			//设置值
+			mapMessage.setString("message---"+i, "my map message++++++++1111"+i);
+			producer.send(mapMessage);
+		}
+		session.commit();
+		session.close();
+		conn.close();
+	}
 	/**
 	 * 当消息处于非事务会话中，消息何时被确认取决于会话创建时候选择的应答模式,Session.AUTO_ACKNOWLEDGE，当客户端成功的从receive（）方法返回的时侯或者
 	 * 从MessageListener.onMessage方法成功返回时，会话自动确认客户收到消息
@@ -85,22 +85,22 @@ public class QueueSender {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
-		//（此地址为后面测试broker的时候填入的，实际需要天气activeMQ运行地址和端口)
-		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
-		Connection conn = connFactory.createConnection();
-		conn.start();
-		Session session = conn.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
-		Destination destination = session.createQueue("david-queue_client_acknowledge");
-		MessageProducer producer = session.createProducer(destination);
-		for (int i = 0; i < 3; i++) {
-			MapMessage mapMessage = session.createMapMessage();
-			mapMessage.setStringProperty("hello"+i, "world");
-			mapMessage.setString("message---"+i, "my map message++++++++"+i);
-			producer.send(mapMessage);
-		}
-		session.close();
-		conn.close();
-	}
+//	public static void main(String[] args) throws Exception {
+//		//（此地址为后面测试broker的时候填入的，实际需要天气activeMQ运行地址和端口)
+//		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
+//		Connection conn = connFactory.createConnection();
+//		conn.start();
+//		Session session = conn.createSession(Boolean.FALSE, Session.CLIENT_ACKNOWLEDGE);
+//		Destination destination = session.createQueue("david-queue_client_acknowledge");
+//		MessageProducer producer = session.createProducer(destination);
+//		for (int i = 0; i < 3; i++) {
+//			MapMessage mapMessage = session.createMapMessage();
+//			mapMessage.setStringProperty("hello"+i, "world");
+//			mapMessage.setString("message---"+i, "my map message++++++++"+i);
+//			producer.send(mapMessage);
+//		}
+//		session.close();
+//		conn.close();
+//	}
 	
 }

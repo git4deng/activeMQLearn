@@ -27,7 +27,7 @@ public class PersistenceReceiver {
 		ConnectionFactory connFactory=new ActiveMQConnectionFactory("tcp://47.107.184.235:61616");
 		Connection conn = connFactory.createConnection();
 		//设置消费者id,用来识别消费者
-		conn.setClientID("cc_01");
+		conn.setClientID("cc_02");
 		Session session = conn.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
 		Topic destination = session.createTopic("mytopic_persistent");
 		//创建TopicSubscriber来订阅
